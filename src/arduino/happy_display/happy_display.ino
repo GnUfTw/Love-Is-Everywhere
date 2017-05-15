@@ -8,13 +8,14 @@ const String msg1 = "Love yourself first and everything else falls into line."; 
 const String msg2 = "Act as if what you do makes a difference, it does.";       // William Jones
 const String msg3 = "No one can make you feel inferior without your consent.";  // Eleanor Roosevelt
 const String msg4 = "Trust yourself, you know more than you think you do.";     // Benjamin Spock
+const string msg5 = "";
 
 String messages[] = {msg1, msg2, msg3, msg4};
 
 void setup()
 {
   Serial1.begin(BAUD_RATE); // set up serial port for 9600 baud
-  delay(BOOT_DELAY); // wait for display to boot up
+  delay(BOOT_DELAY);  // wait for display to boot up
 }
 
 void clearDisplay()
@@ -60,6 +61,8 @@ void loop()
   }
 
   while(1);
+
+  // Should probably shut down the arduino if it reaches this point or atleast sleep it
 }
 
 
