@@ -2,22 +2,26 @@
 	if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$location = filter_input(INPUT_POST, 'location');
-		$key = "location";
-		$message = wordwrap(filter_input(INPUT_POST, 'message'), 70);
-
-		// Write submitted location to storage.
-		$locations_json = json_decode(file_get_contents("reach.txt"), true);		
-		$locations_json[] = $location;
-		file_put_contents("reach.txt", json_encode($locations_json));
-
-		// Send email message to creator if the field wasn't left empty.
-		if (strlen($message) > 0)
+		$entered_passphrase = filter_input(INPUT_POST, 'passphrase');
+		if (strcmp($entered_passphrase, "smilemoreoften") == 0)
 		{
-			mail("maxpung@gmail.com", "Message from LoveIsEverywhere finder", $message);
-		}
+			$key = "location";
+			$message = wordwrap(filter_input(INPUT_POST, 'message'), 70);
 
-		header("Location: " . $_SERVER['REQUEST_URI']);
-		exit();
+			// Write submitted location to storage.
+			$locations_json = json_decode(file_get_contents("reach.txt"), true);		
+			$locations_json[] = $location;
+			file_put_contents("reach.txt", json_encode($locations_json));
+
+			// Send email message to creator if the field wasn't left empty.
+			if (strlen($message) > 0)
+			{
+				mail("maxpung@gmail.com", "Message from LoveIsEverywhere finder", $message);
+			}
+
+			header("Location: " . $_SERVER['REQUEST_URI']);
+			exit();
+		}
 	}
 ?>
 
@@ -73,10 +77,10 @@
 				<p><i>"Creativity is the greatest rebellion in existence."</i></p>
 				<p>~ Osho</p>
 			</div>
-			<p>Yang is none without Yin. Much in the way that a battery cannot produce power without its polarities being properly oriented. Without both, life can seem less than whole. By embracing both, we give ourselves the support to move through life in a flow that resonates well with our inner world and our outer world.</p>
-			<p>The purpose of this project is to spread positivity across this planet by reminding us that love is anywhere and everywhere. This project is for you. It is for the one having a rough day and for the one ready to pass the good vibes on.</p>
-			<p> <i>A friendly reminder...you are loved and cared about, even on your darkest days. You are valued and the world needs you.</i></p>
-			<p>I hope you enjoy the kind words and I hope you choose to spread the love, namaste.</p>
+			<p><b>Love Is Everywhere</b> is a project, a social experiment really. This project is a combination of technology, art, and kindness. It is a unique artistic expression of the expression <b>Pay It Forward</b>.</p>
+			<p>If you are visiting this webpage, it is likely that you have found a decorated red box with an LCD screen on top of it. You have found the <b>Love Is Everywhere</b> box. When powered on, messages of self love are scrolled across the LCD in a marquee fashion.</p>
+			<p>This project serves as a reminder that you are loved, even on your darkest days the world needs you. You can overcome anything that crosses your path and you are capable of accomplishing your deepest apsirations. It starts with showing yourself the love you deserve. Only then can one realize that <b>Love Is Everywhere</b>. This project is for you. It is for the one having a rough day and for the one ready to pass the good vibes on.</p>
+			<p>I hope you enjoy the kind words and I hope you spread the love, namaste.</p>
 		</div>
 	</div>
 
@@ -84,11 +88,12 @@
 	<div class="w3-container" id="where" style="padding-bottom:32px;">
 		<div class="w3-content" style="max-width:700px">
 			<h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide w3-padding-left w3-padding-right">PROJECT REACH</span></h5>
-			<p>Shown below are locations submitted by folks who found the box and (hopefully) passed it on.</p>
+			<p>The map below displays markers on locations submitted by folks who have found or were given the <b>Love Is Everywhere</b> box. It's purpose is to provide a visualization for the box's traveling path. It's going to be really interesting to see how far this thing travels.</p>
 			<div id="map" style="width:100%;height:400px;"></div>
-			<p><span class="w3-tag">Enter a new location!</span> Since you have found this box, it would be really cool if you take a moment to enter the location/address which you found it below. And if you want to drop me a message, feel free to do that too :)</p>
+			<p><span class="w3-tag">Enter a new location!</span> Since you have found this box, it would be really cool if you take a moment to enter the location/address which you found it below. There is a passphrase drawn on the box, be sure to include it when submitting the form or the submission will be ignored. Also, if you want to drop me a message, feel free to do that too :)</p>
 			<form name = "locationForm" method = "post">
 				<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Location" required name="location"></p>
+				<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Passphrase" required name="passphrase"></p>
 				<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message the creator" name="message"></p>
 				<p><button class="w3-btn w3-padding" type="submit">SUBMIT</button></p>
 			</form>
@@ -100,7 +105,6 @@
 	<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
 		<p>This project is dedicated to friends passed</p>
 		<p><b>R.I.P DT, NT, IA, and JH</b></p>
-		<p>Created by Maxwell Pung</p>
 	</footer>
 
 	<!-- Make visited location data visible to use in js. -->
