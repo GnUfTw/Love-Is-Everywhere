@@ -3,7 +3,7 @@
 	{
 		$location = filter_input(INPUT_POST, 'location');
 		$entered_passphrase = filter_input(INPUT_POST, 'passphrase');
-		if (strcmp($entered_passphrase, "smilemoreoften") == 0)
+		if (strcmp($entered_passphrase, getenv('loe_passphrase')) == 0)
 		{
 			$key = "location";
 			$message = wordwrap(filter_input(INPUT_POST, 'message'), 70);
@@ -34,7 +34,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	<!-- tell browser to adjust dimensions & scaling to width of device -->
 		<meta name="description" content="This page documents the journey of a electronic project that hopefully delivers positivity to people."/>
 		<title>Love Is Everywhere</title>
-		<!--<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">-->
 		<link rel="stylesheet" href="w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
 		<link rel="stylesheet" type="text/css" href="stylin.css">
@@ -100,23 +99,25 @@
 		</div>
 	</div>
 	
-	</div>	<!-- End page content -->
+	</div>	
 
 	<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
 		<p>This project is dedicated to friends passed</p>
 		<p><b>R.I.P DT, NT, IA, and JH</b></p>
-	</footer>
+	</footer>  
+    <!-- End page content -->
 
-	<!-- Make visited location data visible to use in js. -->
+	<!-- Make visited location data visible to use in JS. -->
 	<div id="location-data" style="display: none;">
 		<?php
 			echo file_get_contents("reach.txt");
 		?>
 	</div>
-
+    
+    <!-- It is worth noting that my API key has its usage restricted to my website. So, don't bother trying to use it. -->
 	<script type="text/javascript" src="map.js"></script>
 	<script 
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZmG5HzKfNp-9Wq51UUkk2jXFkeC5sJ54&callback=initMap">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW0hWUrffVzE4TCkZdgvqyuJU9Loi6u8A&callback=initMap">
 	</script>
 	</body>
 </html>
